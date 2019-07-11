@@ -885,10 +885,11 @@ install_v2ray() {
 			echo
 			exit 1
 		fi
+		echo " 拷贝配置文件呢。"
 		mkdir -p /etc/v2ray/233boy/v2ray
 		cp -rf $(pwd)/* /etc/v2ray/233boy/v2ray
 	else
-		git clone https://github.com/233boy/v2ray /etc/v2ray/233boy/v2ray
+		git clone https://github.com/ivanhao/ivan-v2ray /etc/v2ray/233boy/v2ray
 	fi
 
 	[ -d /tmp/v2ray ] && rm -rf /tmp/v2ray
@@ -906,17 +907,17 @@ install_v2ray() {
 
 	unzip $v2ray_tmp_file -d "/tmp/v2ray/"
 	mkdir -p /usr/bin/v2ray
-	cp -f "/tmp/v2ray/v2ray-${v2ray_ver}-linux-${v2ray_bit}/v2ray" "/usr/bin/v2ray/v2ray"
+	cp -f "/tmp/v2ray/v2ray" "/usr/bin/v2ray/v2ray"
 	chmod +x "/usr/bin/v2ray/v2ray"
-	cp -f "/tmp/v2ray/v2ray-${v2ray_ver}-linux-${v2ray_bit}/v2ctl" "/usr/bin/v2ray/v2ctl"
+	cp -f "/tmp/v2ray/v2ctl" "/usr/bin/v2ray/v2ctl"
 	chmod +x "/usr/bin/v2ray/v2ctl"
 
 	if [[ $systemd ]]; then
-		cp -f "/tmp/v2ray/v2ray-${v2ray_ver}-linux-${v2ray_bit}/systemd/v2ray.service" "/lib/systemd/system/"
+		cp -f "/tmp/v2ray/systemd/v2ray.service" "/lib/systemd/system/"
 		systemctl enable v2ray
 	else
 		apt-get install -y daemon
-		cp "/tmp/v2ray/v2ray-${v2ray_ver}-linux-${v2ray_bit}/systemv/v2ray" "/etc/init.d/v2ray"
+		cp "/tmp/v2ray/systemv/v2ray" "/etc/init.d/v2ray"
 		chmod +x "/etc/init.d/v2ray"
 		update-rc.d -f v2ray defaults
 	fi
