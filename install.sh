@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version='v4.28.2'
+version='v4.22.1'
 red='\e[91m'
 green='\e[92m'
 yellow='\e[93m'
